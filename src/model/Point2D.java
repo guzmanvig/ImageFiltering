@@ -1,8 +1,8 @@
 package model;
 
 public class Point2D {
-  private final double x;
-  private final double y;
+  private double x;
+  private double y;
 
   public Point2D(double x, double y) {
     this.x = x;
@@ -15,5 +15,17 @@ public class Point2D {
 
   public double getY() {
     return y;
+  }
+
+  public void setX(double x) {
+    this.x = x;
+  }
+
+  public void setY(double y) {
+    this.y = y;
+  }
+
+  public double calculateDistance(Point2D otherPoint) {
+    return Math.sqrt(Math.pow(this.x - otherPoint.x, 2) + Math.pow(this.y - otherPoint.y, 2));
   }
 }
