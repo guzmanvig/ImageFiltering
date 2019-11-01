@@ -15,7 +15,8 @@ public class ClusteringModel implements Model {
   }
 
   @Override
-  public List<List<Line2D>> getResultingLines() {
+  public Line2D getResultingLine() {
     return null;
   }
+
 }
