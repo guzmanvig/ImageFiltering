@@ -8,6 +8,6 @@ public interface Model {
 
   List<List<Point2D>> getResultingPoints();
 
-  List<List<Line2D>> getResultingLines();
+  Line2D getResultingLine();
 
 }

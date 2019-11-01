@@ -35,9 +35,10 @@ public class KClusteringModel implements Model {
   }
 
   @Override
-  public List<List<Line2D>> getResultingLines() {
+  public Line2D getResultingLine() {
     return null;
   }
+
 
   // TODO: make it void and return the correct thing
   public List<Cluster> calculateTest(List<Point2D> input) {
