@@ -1,5 +1,7 @@
 package controller;
 
+import java.io.IOException;
+
 public interface Controller {
-  void go();
+  void go() throws IOException;
 }

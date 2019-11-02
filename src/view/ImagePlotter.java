@@ -1,4 +1,7 @@
+package view;
+
 import java.awt.*;
+import java.awt.Color;
 import java.awt.geom.AffineTransform;
 import java.awt.image.BufferedImage;
 import java.io.FileOutputStream;
@@ -19,11 +22,11 @@ import javax.imageio.ImageIO;
  */
 public class ImagePlotter {
   private List<Integer> points;
-  private List<Color> pointColors;
+  private List<java.awt.Color> pointColors;
   private List<Integer> lines;
-  private List<Color> lineColors;
+  private List<java.awt.Color> lineColors;
   private List<Integer> circles;
-  private List<Color> circleColors;
+  private List<java.awt.Color> circleColors;
   private int xmin;
   private int xmax;
   private int ymin;
@@ -46,7 +49,7 @@ public class ImagePlotter {
   public void addPoint(int x, int y) {
     points.add(x);
     points.add(y);
-    pointColors.add(Color.BLACK);
+    pointColors.add(java.awt.Color.BLACK);
   }
 
   /**
@@ -55,7 +58,7 @@ public class ImagePlotter {
    * @param y
    * @param col
    */
-  public void addPoint(int x, int y,Color col) {
+  public void addPoint(int x, int y, java.awt.Color col) {
     points.add(x);
     points.add(y);
     pointColors.add(col);
@@ -73,7 +76,7 @@ public class ImagePlotter {
     lines.add(y1);
     lines.add(x2);
     lines.add(y2);
-    lineColors.add(Color.RED);
+    lineColors.add(java.awt.Color.RED);
   }
 
   /**
@@ -84,7 +87,7 @@ public class ImagePlotter {
    * @param y2
    * @param col
    */
-  public void addLine(int x1, int y1, int x2, int y2,Color col) {
+  public void addLine(int x1, int y1, int x2, int y2, java.awt.Color col) {
     lines.add(x1);
     lines.add(y1);
     lines.add(x2);
@@ -102,7 +105,7 @@ public class ImagePlotter {
     circles.add(x);
     circles.add(y);
     circles.add(radius);
-    circleColors.add(Color.GREEN);
+    circleColors.add(java.awt.Color.GREEN);
   }
 
   /**
@@ -112,7 +115,7 @@ public class ImagePlotter {
    * @param radius
    * @param col
    */
-  public void addCircle(int x, int y, int radius,Color col) {
+  public void addCircle(int x, int y, int radius, java.awt.Color col) {
     circles.add(x);
     circles.add(y);
     circles.add(radius);
@@ -162,7 +165,7 @@ public class ImagePlotter {
 
     Graphics2D g2d = (Graphics2D) image.getGraphics();
 
-    g2d.setColor(Color.WHITE);
+    g2d.setColor(java.awt.Color.WHITE);
     g2d.fillRect(0,0,width,height);
     AffineTransform mat = new AffineTransform();
     mat.concatenate(AffineTransform.getTranslateInstance(0, this.height));
@@ -213,8 +216,8 @@ public class ImagePlotter {
     points = new ArrayList<Integer>();
     lines = new ArrayList<Integer>();
     circles = new ArrayList<Integer>();
-    pointColors = new ArrayList<Color>();
-    lineColors = new ArrayList<Color>();
+    pointColors = new ArrayList<java.awt.Color>();
+    lineColors = new ArrayList<java.awt.Color>();
     circleColors = new ArrayList<Color>();
   }
 
