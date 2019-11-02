@@ -17,14 +17,6 @@ public class Point2D {
     return y;
   }
 
-  public void setX(double x) {
-    this.x = x;
-  }
-
-  public void setY(double y) {
-    this.y = y;
-  }
-
   public double calculateDistance(Point2D otherPoint) {
     return Math.sqrt(Math.pow(this.x - otherPoint.x, 2) + Math.pow(this.y - otherPoint.y, 2));
   }

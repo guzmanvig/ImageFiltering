@@ -1,10 +1,7 @@
 import static org.junit.Assert.*;
 
 import java.util.ArrayList;
-import java.util.List;
 import model.KClusteringModel;
-import model.KClusteringModel.Cluster;
-import model.Model;
 import model.Point2D;
 import org.junit.Test;
 
@@ -51,10 +48,6 @@ public class KClusteringModelTest {
     list.add(p13);
     list.add(p14);
     list.add(p15);
-
-    List<Cluster> a = model.calculateTest(list);
-    int b = 0;
-
   }
 
 }
