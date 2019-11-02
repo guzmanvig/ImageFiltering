@@ -32,22 +32,22 @@ public class LinearRegressionModel implements Model {
 
     double t = ((syy - sxx) * Math.cos(theta) - 2 * sxy * Math.sin(theta)) > 0 ? theta :
         theta + Math.PI;
-    System.out.println(t);
+    System.out.println("t=" + t);
 
     double a = Math.cos(t / 2);
-    System.out.println(a);
+    System.out.println("a=" + a);
     double b = Math.sin(t / 2);
-    System.out.println(b);
+    System.out.println("b=" + b);
     double c = -a * avgX - b * avgY;
-    System.out.println(c);
+    System.out.println("c=" + c);
 
     OptionalDouble minX = input.stream().mapToDouble(p -> p.getX()).min();
     System.out.println(minX);
     OptionalDouble maxX = input.stream().mapToDouble(p -> p.getX()).max();
     System.out.println(maxX);
 
-    line = new Line2D(new Point2D(minX.getAsDouble(), (-a / b) * minX.getAsDouble() + b),
-        new Point2D(maxX.getAsDouble(), (-a / b) * maxX.getAsDouble() + b));
+    line = new Line2D(new Point2D(minX.getAsDouble(), (-a * minX.getAsDouble() - c) / b),
+        new Point2D(maxX.getAsDouble(), (-a * maxX.getAsDouble() - c) / b));
 
     System.out.println(line.getStart());
     System.out.println(line.getEnd());
