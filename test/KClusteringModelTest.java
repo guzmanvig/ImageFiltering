@@ -1,17 +1,51 @@
 import static org.junit.Assert.*;
 
 import java.util.ArrayList;
+import java.util.List;
 import model.KClusteringModel;
+import model.Line2D;
+import model.Model;
 import model.Point2D;
 import org.junit.Test;
 
 public class KClusteringModelTest {
 
+  @Test(expected = IllegalArgumentException.class)
+  public void test0K() {
+    new KClusteringModel(0);
+  }
+
+  @Test(expected = IllegalArgumentException.class)
+  public void testNegativeK() {
+    new KClusteringModel(-5);
+  }
+
+  @Test(expected = IllegalArgumentException.class)
+  public void testInputSmallerThanClusters() {
+    Model model = new KClusteringModel(2);
+    List<Point2D> list = new ArrayList<>();
+    list.add(new Point2D(0,0));
+    model.calculate(list);
+  }
+
   @Test
-  public void testCluster() {
-    // TODO: use interface.
-    KClusteringModel model = new KClusteringModel(4);
-    ArrayList<Point2D> list = new ArrayList<>();
+  public void testInputEqualThanClusters() {
+    Model model = new KClusteringModel(1);
+    List<Point2D> list = new ArrayList<>();
+    list.add(new Point2D(5,4));
+    model.calculate(list);
+    List<List<Point2D>> points = model.getResultingPoints();
+    assertEquals(1,points.size());
+    assertEquals(1,points.get(0).size());
+    assertEquals(5,points.get(0).get(0).getX(), 0.1);
+    assertEquals(4,points.get(0).get(0).getY(), 0.1);
+
+  }
+
+  @Test
+  public void testGenerateClusters() {
+    Model model = new KClusteringModel(4);
+    List<Point2D> list = new ArrayList<>();
 
     Point2D p0 = new Point2D(0,0);
     Point2D p1 = new Point2D(1,0);
@@ -48,6 +82,16 @@ public class KClusteringModelTest {
     list.add(p13);
     list.add(p14);
     list.add(p15);
+
+    model.calculate(list);
+    List<List<Point2D>> points = model.getResultingPoints();
+    Line2D line = model.getResultingLine();
+
+    // Check that the model doesn't output any lines
+    assertNull(line);
+    // Check that result has 4 clusters
+    assertEquals(4, points.size());
+
   }
 
 }

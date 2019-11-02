@@ -15,22 +15,24 @@ public class DataController implements Controller {
 
   private Model model;
   private View view;
-  private List<Point2D> listOfPoints;
 
   public DataController(Readable input, Model model, View view) {
+    if (input == null || model == null || view == null) {
+      throw new IllegalArgumentException("Arguments must be not null");
+    }
     this.model = model;
     this.view = view;
-    listOfPoints = getInputPoints(input);
+    List<Point2D> listOfPoints = getInputPoints(input);
     model.calculate(listOfPoints);
   }
 
   private List<Point2D> getInputPoints(Readable input) {
     Scanner scanner = new Scanner(input);
     List<Point2D> pointsList = new ArrayList<>();
-    Double xCoordinate;
-    Double yCoordinate;
+    double xCoordinate;
+    double yCoordinate;
     String line;
-    String coordinates[];
+    String[] coordinates;
     while (scanner.hasNextLine()) {
       line = scanner.nextLine();
       coordinates = line.split("\\s");
