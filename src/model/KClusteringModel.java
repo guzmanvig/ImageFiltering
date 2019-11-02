@@ -27,12 +27,17 @@ public class KClusteringModel implements Model {
   }
 
   @Override
-  public List<List<Point2D>> getResultingPoints() {
+  public List<List<Point2D>> getResultingGroupOfPoints() {
     List<List<Point2D>> allPoints = new ArrayList<>();
     for (Cluster cluster : bestClusters) {
       allPoints.add(cluster.points);
     }
     return allPoints;
+  }
+
+  @Override
+  public List<Point2D> getResultingPoints() {
+    return null;
   }
 
   @Override

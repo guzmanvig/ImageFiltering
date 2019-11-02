@@ -6,9 +6,12 @@ import java.util.OptionalDouble;
 public class LinearRegressionModel implements Model {
 
   private Line2D line;
+  private List<Point2D> listOfPoints;
+
 
   @Override
   public void calculate(List<Point2D> input) {
+    this.listOfPoints = input;
     int numberOfPoints = input.size();
     double sumOfX = input.stream().mapToDouble(p -> p.getX()).sum();
     double sumOfY = input.stream().mapToDouble(p -> p.getY()).sum();
@@ -36,8 +39,13 @@ public class LinearRegressionModel implements Model {
   }
 
   @Override
-  public List<List<Point2D>> getResultingPoints() {
+  public List<List<Point2D>> getResultingGroupOfPoints() {
     return null;
+  }
+
+  @Override
+  public List<Point2D> getResultingPoints() {
+    return this.listOfPoints;
   }
 
   @Override
