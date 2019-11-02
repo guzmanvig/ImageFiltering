@@ -3,6 +3,7 @@ package model;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.HashMap;
+import java.util.HashSet;
 import java.util.List;
 import java.util.Map;
 import java.util.Random;
@@ -16,6 +17,7 @@ public class KClusteringModel implements Model {
   private final int k;
   private double error;
   private Map<Double, List<Cluster>> errorsAndClustersMap = new HashMap<>();
+  private List<Cluster> bestClusters;
 
   public KClusteringModel(int k) {
     if (k <= 0) {
@@ -25,13 +27,12 @@ public class KClusteringModel implements Model {
   }
 
   @Override
-  public void calculate(List<Point2D> input) {
-
-  }
-
-  @Override
   public List<List<Point2D>> getResultingPoints() {
-    return null;
+    List<List<Point2D>> allPoints = new ArrayList<>();
+    for (Cluster cluster : bestClusters) {
+      allPoints.add(cluster.points);
+    }
+    return allPoints;
   }
 
   @Override
@@ -40,8 +41,12 @@ public class KClusteringModel implements Model {
   }
 
 
-  // TODO: make it void and return the correct thing
-  public List<Cluster> calculateTest(List<Point2D> input) {
+  @Override
+  public void calculate(List<Point2D> input) {
+
+    if (input.size() < k) {
+      throw new IllegalArgumentException("The input should be bigger than k.");
+    }
 
     for (int i = 0; i < RANSAC_ITERATIONS; i++) {
 
@@ -58,16 +63,22 @@ public class KClusteringModel implements Model {
     Set<Double> allErrors = errorsAndClustersMap.keySet();
     Double minError = Collections.min(allErrors);
 
-    List<Cluster> bestClusters = errorsAndClustersMap.get(minError);
-    return bestClusters;
-
+    bestClusters = errorsAndClustersMap.get(minError);
   }
 
   private List<Cluster> getKRandomClusters(List<Point2D> input) {
     List<Cluster> randomClusters = new ArrayList<>();
-    Random randomIndex = new Random();
+    Random randomIndexGenerator = new Random();
+    Set<Integer> usedIndexes = new HashSet<>();
     for (int i = 0; i < k; i++) {
-      Point2D c = input.get(randomIndex.nextInt(input.size()));
+      // Gets a random index that it's not been used.
+      int randomIndex = randomIndexGenerator.nextInt(input.size());
+      while (usedIndexes.contains(randomIndex)) {
+        randomIndex = randomIndexGenerator.nextInt(input.size());
+      }
+      usedIndexes.add(randomIndex);
+
+      Point2D c = input.get(randomIndex);
       randomClusters.add(new Cluster(c));
     }
     return randomClusters;
@@ -94,7 +105,7 @@ public class KClusteringModel implements Model {
 
       // Repeat the process until the new error is less than the error.
       double percentageError = Math.abs(newError - error) / error;
-      if (percentageError < THRESHOLD) {
+      if (percentageError > THRESHOLD) {
         error = newError;
         addPointsToClusterAndRecalculateCenter(input, clusters, iterations + 1);
       }
@@ -133,8 +144,7 @@ public class KClusteringModel implements Model {
     }
   }
 
-  // TODO: make private
-  public static class Cluster {
+  private static class Cluster {
     private Point2D center;
     private List<Point2D> points;
 
@@ -151,6 +161,10 @@ public class KClusteringModel implements Model {
       return center;
     }
 
+    List<Point2D> getPoints() {
+      return points;
+    }
+
     void clear() {
       points.clear();
     }
@@ -164,8 +178,8 @@ public class KClusteringModel implements Model {
       }
       double averageX = xSum / points.size();
       double averageY = ySum / points.size();
-      center.setX(averageX);
-      center.setY(averageY);
+      center = new Point2D(averageX, averageY);
+
     }
 
     double getAverageDistanceToCenter() {
