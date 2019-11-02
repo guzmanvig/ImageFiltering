@@ -1,13 +1,14 @@
 package controller;
 
+import java.awt.Color;
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Random;
 import java.util.Scanner;
 import model.Line2D;
 import model.Model;
 import model.Point2D;
-import view.Color;
 import view.View;
 
 public class DataController implements Controller {
@@ -35,7 +36,6 @@ public class DataController implements Controller {
       coordinates = line.split("\\s");
       xCoordinate = Double.parseDouble(coordinates[0]);
       yCoordinate = Double.parseDouble(coordinates[1]);
-      System.out.println(yCoordinate);
       pointsList.add(new Point2D(xCoordinate, yCoordinate));
     }
     return pointsList;
@@ -44,27 +44,24 @@ public class DataController implements Controller {
 
   @Override
   public void go() throws IOException {
-    // TODO: FIX COLORS:
+    Random rgbGenerator = new Random();
     Line2D line = model.getResultingLine();
     if (line != null) {
       view.drawLine(line.getStart().getX(), line.getStart().getY(),
           line.getEnd().getX(), line.getEnd().getY(),
-          new Color(0, 0, 1));
-
-      for (Point2D point :
-          listOfPoints) {
-        view.drawPoint(point.getX(), point.getY(),
-            new Color(0, 0, 1));
-      }
-
-      view.writeToFile("linearRegression.png");
+          Color.RED);
     }
 
-//    List<List<Point2D>> groupsOfPoints = model.getResultingPoints();
-//    for (List<Point2D> groupOfPoints : groupsOfPoints) {
-//      for (Point2D point2D : groupOfPoints) {
-//        view.drawPoint(point2D.getX(), point2D.getY(), new Color(0, 0, 1));
-//      }
-//    }
+    List<List<Point2D>> points = model.getResultingPoints();
+    for (List<Point2D> pointGroup : points) {
+      Color groupColor = new Color(rgbGenerator.nextFloat(), rgbGenerator.nextFloat(),
+                                                                      rgbGenerator.nextFloat());
+      for (Point2D point : pointGroup) {
+        view.drawPoint(point.getX(), point.getY(), groupColor);
+      }
+    }
+
+    view.writeToFile("linearRegression.png");
+
   }
 }

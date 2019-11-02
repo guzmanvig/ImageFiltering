@@ -1,5 +1,6 @@
 package view;
 
+import java.awt.Color;
 import java.io.IOException;
 
 public class ImagePlotterView implements View {
@@ -15,12 +16,12 @@ public class ImagePlotterView implements View {
 
   @Override
   public void drawPoint(double x, double y, Color rgb) {
-    plotter.addPoint((int) x, (int) y);
+    plotter.addPoint((int) x, (int) y, rgb);
   }
 
   @Override
   public void drawLine(double xStart, double yStart, double xEnd, double yEnd, Color rgb) {
-    plotter.addLine((int) xStart, (int) yStart, (int) xEnd + 20, (int) yEnd);
+    plotter.addLine((int) xStart, (int) yStart, (int) xEnd + 20, (int) yEnd, rgb);
   }
 
   @Override

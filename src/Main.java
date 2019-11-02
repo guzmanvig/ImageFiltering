@@ -4,6 +4,7 @@ import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.FileReader;
 import java.io.IOException;
+import model.KClusteringModel;
 import model.LinearRegressionModel;
 import model.Model;
 import view.ImagePlotterView;
@@ -13,9 +14,9 @@ public class Main {
 
   public static void main(String[] args) throws IOException {
 
-    Model model = new LinearRegressionModel();
+    Model model = new KClusteringModel(3);
     View view = new ImagePlotterView();
-    Controller controller = new DataController(new FileReader(new File("data/linedata-1.txt")),
+    Controller controller = new DataController(new FileReader(new File("data/clusterdata-6.txt")),
         model,
         view);
 

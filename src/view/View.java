@@ -1,5 +1,6 @@
 package view;
 
+import java.awt.Color;
 import java.io.IOException;
 
 public interface View {
