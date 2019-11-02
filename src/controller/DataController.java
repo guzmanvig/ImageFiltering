@@ -35,7 +35,6 @@ public class DataController implements Controller {
       coordinates = line.split("\\s");
       xCoordinate = Double.parseDouble(coordinates[0]);
       yCoordinate = Double.parseDouble(coordinates[1]);
-      System.out.println(yCoordinate);
       pointsList.add(new Point2D(xCoordinate, yCoordinate));
     }
     return pointsList;
