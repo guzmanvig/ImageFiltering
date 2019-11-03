@@ -15,7 +15,14 @@ public class Main {
   public static void main(String[] args) throws IOException {
 
     Model model = new KClusteringModel(3);
-    View view = new ImagePlotterView();
+    View view = ImagePlotterView.getBuilder()
+        .setHeight(200)
+        .setWidth(200)
+        .setDimensionsXMin(-400)
+        .setDimensionsXMax(400)
+        .setDimensionsYMin(-400)
+        .setDimensionsYMax(400)
+        .build();
     Controller controller = new DataController(new FileReader(new File("data/clusterdata-6.txt")),
         model,
         view);

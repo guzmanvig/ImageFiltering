@@ -32,4 +32,23 @@ public class Point2D {
         .append(")")
         .toString();
   }
+
+  @Override
+  public int hashCode() {
+    return this.toString().hashCode();
+  }
+
+  @Override
+  public boolean equals(Object o) {
+    if (o == this) {
+      return true;
+    }
+
+    if (!(o instanceof Point2D)) {
+      return false;
+    }
+
+    Point2D other = (Point2D) o;
+    return this.x == other.x && this.y == other.y;
+  }
 }

@@ -66,6 +66,7 @@ public class DataControllerTest {
   private static class MockView implements View {
     ArrayList<Point2D> pointsDrawn = new ArrayList<>();
     ArrayList<Point2D> lineDrawn = new ArrayList<>();
+
     @Override
     public void drawPoint(double x, double y, Color rgb) {
       pointsDrawn.add(new Point2D(x, y));
@@ -93,15 +94,13 @@ public class DataControllerTest {
   @Test(expected = IllegalArgumentException.class)
   public void testNullInput() {
     Model model = new KClusteringModel(1);
-    View view = new ImagePlotterView();
-    new DataController(null, model, view);
+    new DataController(null, model, mockView);
   }
 
   @Test(expected = IllegalArgumentException.class)
   public void testNullModel() {
     Reader in = new StringReader("");
-    View view = new ImagePlotterView();
-    new DataController(in, null, view);
+    new DataController(in, null, mockView);
   }
 
   @Test(expected = IllegalArgumentException.class)
@@ -115,56 +114,49 @@ public class DataControllerTest {
   public void testWrongInput0() {
     Readable input = new StringReader("1 2 3");
     Model model = new KClusteringModel(1);
-    View view = new ImagePlotterView();
-    new DataController(input, model, view);
+    new DataController(input, model, mockView);
   }
 
   @Test(expected = IllegalArgumentException.class)
   public void testWrongInput1() {
     Readable input = new StringReader("");
     Model model = new KClusteringModel(1);
-    View view = new ImagePlotterView();
-    new DataController(input, model, view);
+    new DataController(input, model, mockView);
   }
 
   @Test(expected = IllegalArgumentException.class)
   public void testWrongInput2() {
     Readable input = new StringReader("a");
     Model model = new KClusteringModel(1);
-    View view = new ImagePlotterView();
-    new DataController(input, model, view);
+    new DataController(input, model, mockView);
   }
 
   @Test(expected = IllegalArgumentException.class)
   public void testWrongInput3() {
     Readable input = new StringReader("a b \n");
     Model model = new KClusteringModel(1);
-    View view = new ImagePlotterView();
-    new DataController(input, model, view);
+    new DataController(input, model, mockView);
   }
 
   @Test(expected = IllegalArgumentException.class)
   public void testWrongInput4() {
     Readable input = new StringReader("5 \n");
     Model model = new KClusteringModel(1);
-    View view = new ImagePlotterView();
-    new DataController(input, model, view);
+    new DataController(input, model, mockView);
   }
 
   @Test(expected = IllegalArgumentException.class)
   public void testWrongInput5() {
     Readable input = new StringReader("5 6 5\n");
     Model model = new KClusteringModel(1);
-    View view = new ImagePlotterView();
-    new DataController(input, model, view);
+    new DataController(input, model, mockView);
   }
 
   @Test(expected = IllegalArgumentException.class)
   public void testWrongInput6() {
     Readable input = new StringReader("5 6 \n 1 \n");
     Model model = new KClusteringModel(1);
-    View view = new ImagePlotterView();
-    new DataController(input, model, view);
+    new DataController(input, model, mockView);
   }
 
   @Test
