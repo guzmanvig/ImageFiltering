@@ -34,7 +34,7 @@ public class KClusteringModelTest {
     List<Point2D> list = new ArrayList<>();
     list.add(new Point2D(5,4));
     model.calculate(list);
-    List<List<Point2D>> points = model.getResultingPoints();
+    List<List<Point2D>> points = model.getResultingGroupOfPoints();
     assertEquals(1,points.size());
     assertEquals(1,points.get(0).size());
     assertEquals(5,points.get(0).get(0).getX(), 0.1);
@@ -84,7 +84,7 @@ public class KClusteringModelTest {
     list.add(p15);
 
     model.calculate(list);
-    List<List<Point2D>> points = model.getResultingPoints();
+    List<List<Point2D>> points = model.getResultingGroupOfPoints();
     Line2D line = model.getResultingLine();
 
     // Check that the model doesn't output any lines

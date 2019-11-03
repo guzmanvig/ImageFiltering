@@ -5,7 +5,7 @@ import java.io.IOException;
 
 public class ImagePlotterView implements View {
 
-  ImagePlotter plotter;
+  private ImagePlotter plotter;
 
   public ImagePlotterView() {
     plotter = new ImagePlotter();

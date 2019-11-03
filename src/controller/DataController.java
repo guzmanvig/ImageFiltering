@@ -54,12 +54,21 @@ public class DataController implements Controller {
           Color.RED);
     }
 
-    List<List<Point2D>> points = model.getResultingPoints();
-    for (List<Point2D> pointGroup : points) {
-      Color groupColor = new Color(rgbGenerator.nextFloat(), rgbGenerator.nextFloat(),
-                                                                      rgbGenerator.nextFloat());
-      for (Point2D point : pointGroup) {
-        view.drawPoint(point.getX(), point.getY(), groupColor);
+    List<Point2D> points = model.getResultingPoints();
+    if (points != null) {
+      for (Point2D point : points) {
+        view.drawPoint(point.getX(), point.getY(), Color.BLACK);
+      }
+    }
+
+    List<List<Point2D>> groupOfPoints = model.getResultingGroupOfPoints();
+    if (groupOfPoints != null) {
+      for (List<Point2D> pointGroup : groupOfPoints) {
+        Color groupColor = new Color(rgbGenerator.nextFloat(), rgbGenerator.nextFloat(),
+            rgbGenerator.nextFloat());
+        for (Point2D point : pointGroup) {
+          view.drawPoint(point.getX(), point.getY(), groupColor);
+        }
       }
     }
 
