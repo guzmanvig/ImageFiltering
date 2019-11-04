@@ -11,6 +11,10 @@ import model.Model;
 import model.Point2D;
 import view.View;
 
+/**
+ * Class that implements the Controller interface and creates and assigns the different algorithms
+ * models and views.
+ */
 public class DataController implements Controller {
 
   private Model model;
@@ -36,6 +40,9 @@ public class DataController implements Controller {
     while (scanner.hasNextLine()) {
       line = scanner.nextLine();
       coordinates = line.split("\\s");
+      if (coordinates.length != 2) {
+        throw new IllegalArgumentException("Wrong format of input file.");
+      }
       xCoordinate = Double.parseDouble(coordinates[0]);
       yCoordinate = Double.parseDouble(coordinates[1]);
       pointsList.add(new Point2D(xCoordinate, yCoordinate));
@@ -45,7 +52,7 @@ public class DataController implements Controller {
 
 
   @Override
-  public void go() throws IOException {
+  public void go(String fileName) throws IOException {
     Random rgbGenerator = new Random();
     Line2D line = model.getResultingLine();
     if (line != null) {
@@ -72,7 +79,7 @@ public class DataController implements Controller {
       }
     }
 
-    view.writeToFile("linearRegression.png");
+    view.writeToFile(fileName);
 
   }
 }

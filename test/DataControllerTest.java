@@ -20,6 +20,7 @@ public class DataControllerTest {
 
   private MockModel mockModel;
   private MockView mockView;
+  private final String mockFileName = "mock.png";
 
   // Mock model to be able to test if the controller passes the input to the model correctly,
   // and if the controller passes the output of the model to the view correctly.
@@ -27,6 +28,7 @@ public class DataControllerTest {
   // in its methods.
 
   private static class MockModel implements Model {
+
     List<Point2D> input;
 
     @Override
@@ -57,13 +59,14 @@ public class DataControllerTest {
 
     @Override
     public Line2D getResultingLine() {
-      return new Line2D(new Point2D(1,2), new Point2D(3,4));
+      return new Line2D(new Point2D(1, 2), new Point2D(3, 4));
     }
   }
 
   // Mock view to test if the controller passes the output from the model to it correctly.
   // For that, it stores the input to the view in public variables so the test can access them.
   private static class MockView implements View {
+
     ArrayList<Point2D> pointsDrawn = new ArrayList<>();
     ArrayList<Point2D> lineDrawn = new ArrayList<>();
 
@@ -163,7 +166,7 @@ public class DataControllerTest {
   public void testOneInput() throws IOException {
     Readable input = new StringReader("1 2");
     DataController controller = new DataController(input, mockModel, mockView);
-    controller.go();
+    controller.go(mockFileName);
     List<Point2D> points = mockModel.input;
     assertEquals(1, points.size());
     assertEquals(1, points.get(0).getX(), 0.1);
@@ -172,9 +175,9 @@ public class DataControllerTest {
 
   @Test
   public void testTwoInputs() throws IOException {
-    Readable input = new StringReader("1 2 \n 3 4");
+    Readable input = new StringReader("1 2\n3 4");
     DataController controller = new DataController(input, mockModel, mockView);
-    controller.go();
+    controller.go(mockFileName);
     List<Point2D> points = mockModel.input;
     assertEquals(2, points.size());
     assertEquals(1, points.get(0).getX(), 0.1);
@@ -187,7 +190,7 @@ public class DataControllerTest {
   public void testLineOutput() throws IOException {
     Readable input = new StringReader("1 2");
     DataController controller = new DataController(input, mockModel, mockView);
-    controller.go();
+    controller.go(mockFileName);
     ArrayList<Point2D> mockLine = mockView.lineDrawn;
     // Check against the known values that the mock model return.
     assertEquals(2, mockLine.size());
@@ -201,7 +204,7 @@ public class DataControllerTest {
   public void testPointsOutput() throws IOException {
     Readable input = new StringReader("1 2");
     DataController controller = new DataController(input, mockModel, mockView);
-    controller.go();
+    controller.go(mockFileName);
     ArrayList<Point2D> mockPoints = mockView.pointsDrawn;
     // Check against the known values that the mock model return.
     assertEquals(5, mockPoints.size());
@@ -216,9 +219,6 @@ public class DataControllerTest {
     assertEquals(9, mockPoints.get(4).getX(), 0.1);
     assertEquals(10, mockPoints.get(4).getY(), 0.1);
   }
-
-
-
 
 
 }

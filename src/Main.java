@@ -14,7 +14,7 @@ public class Main {
 
   public static void main(String[] args) throws IOException {
 
-    Model model = new KClusteringModel(3);
+    Model model = new LinearRegressionModel();
     View view = ImagePlotterView.getBuilder()
         .setHeight(200)
         .setWidth(200)
@@ -23,11 +23,11 @@ public class Main {
         .setDimensionsYMin(-400)
         .setDimensionsYMax(400)
         .build();
-    Controller controller = new DataController(new FileReader(new File("data/clusterdata-6.txt")),
+    Controller controller = new DataController(new FileReader(new File("data/linedata-1.txt")),
         model,
         view);
 
-    controller.go();
+    controller.go("linedata-1.png");
 
   }
 
