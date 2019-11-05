@@ -16,6 +16,9 @@ import org.junit.Test;
 import view.ImagePlotterView;
 import view.View;
 
+/**
+ * Tests for the DataController class.
+ */
 public class DataControllerTest {
 
   private MockModel mockModel;

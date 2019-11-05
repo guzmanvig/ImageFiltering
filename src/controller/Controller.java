@@ -2,6 +2,9 @@ package controller;
 
 import java.io.IOException;
 
+/**
+ * Controller interface.
+ */
 public interface Controller {
 
   /**

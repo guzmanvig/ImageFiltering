@@ -10,8 +10,17 @@ import model.Model;
 import view.ImagePlotterView;
 import view.View;
 
+/**
+ * Main class that creates two png file with each algorithm and different outputs.
+ */
 public class Main {
 
+  /**
+   * Main method.
+   *
+   * @param args
+   * @throws IOException
+   */
   public static void main(String[] args) throws IOException {
 
     Model model = new LinearRegressionModel();
