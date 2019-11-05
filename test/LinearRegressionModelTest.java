@@ -8,6 +8,9 @@ import model.Point2D;
 import org.junit.Before;
 import org.junit.Test;
 
+/**
+ * Tests for the LinearRegressionModel class.
+ */
 public class LinearRegressionModelTest {
 
   private final double DELTA = 0.00001;
