@@ -36,7 +36,22 @@ public class Main {
         model,
         view);
 
-    controller.go("linedata-1.png");
+    controller.go("linear.png");
+
+    Model model2 = new KClusteringModel(4);
+    View view2 = ImagePlotterView.getBuilder()
+        .setHeight(200)
+        .setWidth(200)
+        .setDimensionsXMin(-400)
+        .setDimensionsXMax(400)
+        .setDimensionsYMin(-400)
+        .setDimensionsYMax(400)
+        .build();
+    Controller controller2 = new DataController(new FileReader(new File("data/clusterdata-2.txt")),
+        model2,
+        view2);
+
+    controller2.go("cluster.png");
 
   }
 
