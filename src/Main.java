@@ -1,7 +1,6 @@
 import controller.Controller;
 import controller.DataController;
 import java.io.File;
-import java.io.FileNotFoundException;
 import java.io.FileReader;
 import java.io.IOException;
 import model.KClusteringModel;
@@ -18,8 +17,8 @@ public class Main {
   /**
    * Main method.
    *
-   * @param args
-   * @throws IOException
+   * @param args arguments of our main program.
+   * @throws IOException when File generates an exception.
    */
   public static void main(String[] args) throws IOException {
 
@@ -36,7 +35,7 @@ public class Main {
         model,
         view);
 
-    controller.go("linear.png");
+    controller.execute("linear.png");
 
     Model model2 = new KClusteringModel(4);
     View view2 = ImagePlotterView.getBuilder()
@@ -51,7 +50,7 @@ public class Main {
         model2,
         view2);
 
-    controller2.go("cluster.png");
+    controller2.execute("cluster.png");
 
   }
 

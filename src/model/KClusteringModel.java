@@ -15,7 +15,7 @@ import java.util.Set;
  */
 public class KClusteringModel implements Model {
 
-  private static final double THRESHOLD =  0.01;
+  private static final double THRESHOLD = 0.01;
   private static final int MAXIMUM_ITERATIONS = 100;
   private static final int RANSAC_ITERATIONS = 10;
   private final int k;
@@ -25,6 +25,7 @@ public class KClusteringModel implements Model {
 
   /**
    * Creates an instance of the K means clustering model.
+   *
    * @param k the number of clusters.
    */
   public KClusteringModel(int k) {
@@ -97,8 +98,9 @@ public class KClusteringModel implements Model {
     return randomClusters;
   }
 
-  private void addPointsToClusterAndRecalculateCenter(List<Point2D> input, List<Cluster> clusters, int iterations) {
-    if (iterations < MAXIMUM_ITERATIONS ) {
+  private void addPointsToClusterAndRecalculateCenter(List<Point2D> input, List<Cluster> clusters,
+      int iterations) {
+    if (iterations < MAXIMUM_ITERATIONS) {
 
       // Clear the clusters.
       clearClusters(clusters);
@@ -111,7 +113,7 @@ public class KClusteringModel implements Model {
 
       // Calculate the new error as the average of distances to the new centers.
       double distancesSum = 0;
-      for (Cluster cluster: clusters) {
+      for (Cluster cluster : clusters) {
         distancesSum = distancesSum + cluster.getAverageDistanceToCenter();
       }
       double newError = distancesSum / clusters.size();
@@ -158,6 +160,7 @@ public class KClusteringModel implements Model {
   }
 
   private static class Cluster {
+
     private Point2D center;
     private List<Point2D> points;
 
@@ -204,7 +207,7 @@ public class KClusteringModel implements Model {
     }
 
 
-   }
+  }
 
 
 }

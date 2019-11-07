@@ -11,7 +11,7 @@ public interface Controller {
    * Executes the controller.
    *
    * @param filePath the name of the file in which we are storing the figure.
-   * @throws IOException
+   * @throws IOException when file cannot be written.
    */
-  void go(String filePath) throws IOException;
+  void execute(String filePath) throws IOException;
 }

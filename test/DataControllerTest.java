@@ -1,4 +1,4 @@
-import static org.junit.Assert.*;
+import static org.junit.Assert.assertEquals;
 
 import controller.DataController;
 import java.awt.Color;
@@ -13,7 +13,6 @@ import model.Model;
 import model.Point2D;
 import org.junit.Before;
 import org.junit.Test;
-import view.ImagePlotterView;
 import view.View;
 
 /**
@@ -86,6 +85,7 @@ public class DataControllerTest {
 
     @Override
     public void writeToFile(String fileName) throws IOException {
+      // Leaving this in blank, we do not need to generate the file.
     }
   }
 
@@ -169,7 +169,7 @@ public class DataControllerTest {
   public void testOneInput() throws IOException {
     Readable input = new StringReader("1 2");
     DataController controller = new DataController(input, mockModel, mockView);
-    controller.go(mockFileName);
+    controller.execute(mockFileName);
     List<Point2D> points = mockModel.input;
     assertEquals(1, points.size());
     assertEquals(1, points.get(0).getX(), 0.1);
@@ -180,7 +180,7 @@ public class DataControllerTest {
   public void testTwoInputs() throws IOException {
     Readable input = new StringReader("1 2\n3 4");
     DataController controller = new DataController(input, mockModel, mockView);
-    controller.go(mockFileName);
+    controller.execute(mockFileName);
     List<Point2D> points = mockModel.input;
     assertEquals(2, points.size());
     assertEquals(1, points.get(0).getX(), 0.1);
@@ -193,7 +193,7 @@ public class DataControllerTest {
   public void testLineOutput() throws IOException {
     Readable input = new StringReader("1 2");
     DataController controller = new DataController(input, mockModel, mockView);
-    controller.go(mockFileName);
+    controller.execute(mockFileName);
     ArrayList<Point2D> mockLine = mockView.lineDrawn;
     // Check against the known values that the mock model return.
     assertEquals(2, mockLine.size());
@@ -207,7 +207,7 @@ public class DataControllerTest {
   public void testPointsOutput() throws IOException {
     Readable input = new StringReader("1 2");
     DataController controller = new DataController(input, mockModel, mockView);
-    controller.go(mockFileName);
+    controller.execute(mockFileName);
     ArrayList<Point2D> mockPoints = mockView.pointsDrawn;
     // Check against the known values that the mock model return.
     assertEquals(5, mockPoints.size());

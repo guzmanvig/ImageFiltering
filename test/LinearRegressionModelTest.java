@@ -94,8 +94,8 @@ public class LinearRegressionModelTest {
   @Test(expected = IllegalArgumentException.class)
   public void testLinearRegressionWithDuplicatedPoints() {
     Point2D p0 = new Point2D(-1, 1);
-    Point2D p1 = new Point2D(-1, 1);;
-    Point2D p2 = new Point2D(-1, 1);;
+    Point2D p1 = new Point2D(-1, 1);
+    Point2D p2 = new Point2D(-1, 1);
     listOfPoints.add(p0);
     listOfPoints.add(p1);
     listOfPoints.add(p2);

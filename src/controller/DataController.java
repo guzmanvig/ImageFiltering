@@ -20,6 +20,13 @@ public class DataController implements Controller {
   private Model model;
   private View view;
 
+  /**
+   * Constructor for creating an instance of DataController.
+   *
+   * @param input a Readable object that represents the input of the controller.
+   * @param model a Model object of our MVC.
+   * @param view  a View object of our MVC.
+   */
   public DataController(Readable input, Model model, View view) {
     if (input == null || model == null || view == null) {
       throw new IllegalArgumentException("Arguments must be not null");
@@ -52,7 +59,7 @@ public class DataController implements Controller {
 
 
   @Override
-  public void go(String fileName) throws IOException {
+  public void execute(String fileName) throws IOException {
     Random rgbGenerator = new Random();
     Line2D line = model.getResultingLine();
     if (line != null) {
