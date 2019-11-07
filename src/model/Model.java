@@ -17,7 +17,7 @@ public interface Model {
   /**
    * Returns a list of group clusters, where each cluster is a group of points.
    *
-   * @return List<List < Point2D>> a list of groups.
+   * @return A list of groups of Points 2D.
    */
   List<List<Point2D>> getResultingGroupOfPoints();
 
