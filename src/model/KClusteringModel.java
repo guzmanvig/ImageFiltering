@@ -9,6 +9,10 @@ import java.util.Map;
 import java.util.Random;
 import java.util.Set;
 
+/**
+ * Implementation of a data model that uses k means clustering. It uses a maximum of 100 iteration
+ * and also applies RANSAC 10 times.
+ */
 public class KClusteringModel implements Model {
 
   private static final double THRESHOLD =  0.01;
@@ -19,6 +23,10 @@ public class KClusteringModel implements Model {
   private Map<Double, List<Cluster>> errorsAndClustersMap = new HashMap<>();
   private List<Cluster> bestClusters;
 
+  /**
+   * Creates an instance of the K means clustering model.
+   * @param k the number of clusters.
+   */
   public KClusteringModel(int k) {
     if (k <= 0) {
       throw new IllegalArgumentException("K must be greater than 0");

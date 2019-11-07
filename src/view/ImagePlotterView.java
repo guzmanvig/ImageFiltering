@@ -3,10 +3,17 @@ package view;
 import java.awt.Color;
 import java.io.IOException;
 
+/**
+ * Implementation of a View. It uses the ImagePlotter class to draw into a file.
+ */
 public class ImagePlotterView implements View {
 
   private ImagePlotter plotter;
 
+  /**
+   * Get a builder to create an ImagePlotter.
+   * @return the builder.
+   */
   public static ImagePlotterViewBuilder getBuilder() {
     return new ImagePlotterViewBuilder();
   }
@@ -34,6 +41,10 @@ public class ImagePlotterView implements View {
     plotter.write(fileName);
   }
 
+  /**
+   * Builder for an ImagePlotterView. It allows to create an ImagePlotterView and set parameters
+   * to it.
+   */
   public static class ImagePlotterViewBuilder {
 
     private int width;
@@ -52,36 +63,71 @@ public class ImagePlotterView implements View {
       this.dimensionsYMax = 350;
     }
 
+    /**
+     * Sets the width of the image to be built.
+     * @param width width of the image in pixels.
+     * @return the builder.
+     */
     public ImagePlotterViewBuilder setWidth(int width) {
       this.width = width;
       return this;
     }
 
+    /**
+     * Sets the height of the image to be built.
+     * @param height width of the image in pixels.
+     * @return the builder.
+     */
     public ImagePlotterViewBuilder setHeight(int height) {
       this.height = height;
       return this;
     }
 
+    /**
+     * Sets the min range in x of the data that will be provided to the image.
+     * @param dimensionsXMin min x range.
+     * @return the builder.
+     */
     public ImagePlotterViewBuilder setDimensionsXMin(int dimensionsXMin) {
       this.dimensionsXMin = dimensionsXMin;
       return this;
     }
 
+    /**
+     * Sets the max range in x of the data that will be provided to the image.
+     * @param dimensionsXMax min x range.
+     * @return the builder.
+     */
     public ImagePlotterViewBuilder setDimensionsXMax(int dimensionsXMax) {
       this.dimensionsXMax = dimensionsXMax;
       return this;
     }
 
+    /**
+     * Sets the min range in y of the data that will be provided to the image.
+     * @param dimensionsYMin min y range.
+     * @return the builder.
+     */
     public ImagePlotterViewBuilder setDimensionsYMin(int dimensionsYMin) {
       this.dimensionsYMin = dimensionsYMin;
       return this;
     }
 
+    /**
+     * Sets the max range in y of the data that will be provided to the image.
+     * @param dimensionsYMax max y range.
+     * @return the builder.
+     */
     public ImagePlotterViewBuilder setDimensionsYMax(int dimensionsYMax) {
       this.dimensionsYMax = dimensionsYMax;
       return this;
     }
 
+
+    /**
+     * Creates the ImagePlotterView with the previously set parameters.
+     * @return the created ImagePlotterView.
+     */
     public ImagePlotterView build() {
       return new ImagePlotterView(width, height, dimensionsXMin, dimensionsXMax, dimensionsYMin,
           dimensionsYMax);
