@@ -171,7 +171,7 @@ public class ImagePlotter {
    * Draw all the shapes added thus far to an image and save it to the specific path.
    *
    * @param path a file path for the image file we are generating.
-   * @throws IOException
+   * @throws IOException when file throws a I/O exception.
    */
   public void write(String path) throws IOException {
     BufferedImage image = new BufferedImage(width, height, BufferedImage
